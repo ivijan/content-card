@@ -24,3 +24,4 @@ DEMO: https://ivijan.github.io/content-card
 ## TODO 
     write some tests
     implement Redux
+    comment code properly
