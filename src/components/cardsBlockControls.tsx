@@ -9,14 +9,19 @@ export default class CardsBlockControls extends React.Component<any, any> {
         this.state = {
             id: this.props.id,
             url: this.props.url,
-            removeHandler: this.props.removeHandler
+            removeHandler: this.props.removeHandler,
+            sortHandler: this.props.sortHandler
         };
-        this.addToFavouriteHandler = this.addToFavouriteHandler.bind(this);
+        this.moveToFrontHandler = this.moveToFrontHandler.bind(this);
         this.removeCardHandler = this.removeCardHandler.bind(this);
     }
 
-    public addToFavouriteHandler () {
-        console.log("Save card " + this.state.id + " to favourite list!");
+    public moveToFrontHandler () {
+        console.log("Move card " + this.state.id + " to start of list!");
+
+        if (this.state.sortHandler) {
+            this.state.sortHandler(this.state.id);
+        }
     }
 
     public removeCardHandler () {
@@ -37,7 +42,7 @@ export default class CardsBlockControls extends React.Component<any, any> {
                     <Button bsStyle="link" className="cardsBlock-controls-remove" onClick={this.removeCardHandler}>
                         <span className="glyphicon glyphicon-remove"/>
                     </Button>
-                    <Button bsStyle="link" className="cardsBlock-controls-save" onClick={this.addToFavouriteHandler}>
+                    <Button bsStyle="link" className="cardsBlock-controls-save" onClick={this.moveToFrontHandler}>
                         <span className="glyphicon glyphicon-heart"/>
                     </Button>
                 </div>

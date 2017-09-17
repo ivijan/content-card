@@ -19,14 +19,18 @@ var CardsBlockControls = /** @class */ (function (_super) {
         _this.state = {
             id: _this.props.id,
             url: _this.props.url,
-            removeHandler: _this.props.removeHandler
+            removeHandler: _this.props.removeHandler,
+            sortHandler: _this.props.sortHandler
         };
-        _this.addToFavouriteHandler = _this.addToFavouriteHandler.bind(_this);
+        _this.moveToFrontHandler = _this.moveToFrontHandler.bind(_this);
         _this.removeCardHandler = _this.removeCardHandler.bind(_this);
         return _this;
     }
-    CardsBlockControls.prototype.addToFavouriteHandler = function () {
-        console.log("Save card " + this.state.id + " to favourite list!");
+    CardsBlockControls.prototype.moveToFrontHandler = function () {
+        console.log("Move card " + this.state.id + " to start of list!");
+        if (this.state.sortHandler) {
+            this.state.sortHandler(this.state.id);
+        }
     };
     CardsBlockControls.prototype.removeCardHandler = function () {
         console.log("Remove card " + this.state.id + " from list!");
@@ -43,7 +47,7 @@ var CardsBlockControls = /** @class */ (function (_super) {
                     <react_bootstrap_1.Button bsStyle="link" className="cardsBlock-controls-remove" onClick={this.removeCardHandler}>
                         <span className="glyphicon glyphicon-remove"/>
                     </react_bootstrap_1.Button>
-                    <react_bootstrap_1.Button bsStyle="link" className="cardsBlock-controls-save" onClick={this.addToFavouriteHandler}>
+                    <react_bootstrap_1.Button bsStyle="link" className="cardsBlock-controls-save" onClick={this.moveToFrontHandler}>
                         <span className="glyphicon glyphicon-heart"/>
                     </react_bootstrap_1.Button>
                 </div>

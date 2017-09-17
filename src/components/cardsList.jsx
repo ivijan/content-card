@@ -24,6 +24,7 @@ var CardsList = /** @class */ (function (_super) {
             data: _this.props.data || []
         };
         _this.removeItem = _this.removeItem.bind(_this);
+        _this.sortItem = _this.sortItem.bind(_this);
         return _this;
     }
     CardsList.prototype.componentDidMount = function () {
@@ -43,13 +44,25 @@ var CardsList = /** @class */ (function (_super) {
             self.setState({ error: 'Problems with loading data.', dataLoaded: true });
         });
     };
-    CardsList.prototype.removeItem = function (id) {
+    CardsList.prototype.filterItem = function (id) {
         var card = _.filter(this.state.data, function (e) { return e.id == id; });
-        card = card && card[0];
+        return card && card[0];
+    };
+    CardsList.prototype.removeItem = function (id) {
+        var card = this.filterItem(id);
         if (card) {
-            var index_1 = this.state.data.indexOf(card);
             this.setState(function (state) {
-                state.data.splice(index_1, 1);
+                _.pull(state.data, card);
+                return state;
+            });
+        }
+    };
+    CardsList.prototype.sortItem = function (id) {
+        var card = this.filterItem(id);
+        if (card) {
+            this.setState(function (state) {
+                _.pull(state.data, card);
+                state.data.unshift(card);
                 return state;
             });
         }
@@ -66,7 +79,7 @@ var CardsList = /** @class */ (function (_super) {
         else if (this.state.data.length) {
             content = _.map(this.state.data, function (item) {
                 return (<react_tilt_1.default options={{ max: 15, scale: 1.05 }} className="col col-lg-3 col-md-4 col-sm-6 col-xs-12" key={item.id}>
-                        <CardsBlock_1.default title={item.title} description={item.description} image={item.urlToImage} id={item.id} url={item.url} removeHandler={self.removeItem}/>
+                        <CardsBlock_1.default title={item.title} description={item.description} image={item.urlToImage} id={item.id} url={item.url} removeHandler={self.removeItem} sortHandler={self.sortItem}/>
                     </react_tilt_1.default>);
             });
         }

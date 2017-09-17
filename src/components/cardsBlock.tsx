@@ -17,7 +17,7 @@ export default class CardsList extends React.Component<any, any> {
                     </p>
                 </div>
                 <div className="cardsBlock-tooltip">
-                    <CardsBlockControls id={this.props.id} url={this.props.url} removeHandler={this.props.removeHandler}/>
+                    <CardsBlockControls id={this.props.id} url={this.props.url} sortHandler={this.props.sortHandler} removeHandler={this.props.removeHandler}/>
                 </div>
                 <div className="cardsBlock-background" style={{backgroundImage: 'url(' + this.props.image + ')' }}/>
             </div>

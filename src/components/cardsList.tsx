@@ -13,7 +13,8 @@ export default class CardsList extends React.Component<any, any> {
             dataLoaded: this.props.dataLoaded || false,
             data: this.props.data || []
         };
-        this.removeItem = this.removeItem.bind(this)
+        this.removeItem = this.removeItem.bind(this);
+        this.sortItem = this.sortItem.bind(this);
     }
 
     componentDidMount () {
@@ -35,15 +36,29 @@ export default class CardsList extends React.Component<any, any> {
             });
     }
 
-    public removeItem (id : any) {
+    private filterItem (id : any) {
         let card = _.filter(this.state.data, function(e: any){ return e.id == id; });
-        card = card && card[0];
+        return card && card[0];
+    }
+
+    public removeItem (id : any) {
+        let card = this.filterItem(id);
 
         if (card) {
-            const index = this.state.data.indexOf(card);
-
             this.setState(function(state) {
-                state.data.splice(index, 1);
+                _.pull(state.data, card);
+                return state;
+            });
+        }
+    }
+
+    public sortItem (id : any) {
+        let card = this.filterItem(id);
+
+        if (card) {
+            this.setState(function(state) {
+                _.pull(state.data, card);
+                state.data.unshift(card);
                 return state;
             });
         }
@@ -68,6 +83,7 @@ export default class CardsList extends React.Component<any, any> {
                             id={item.id}
                             url={item.url}
                             removeHandler={self.removeItem}
+                            sortHandler={self.sortItem}
                         />
                     </Tilt>
                 );
