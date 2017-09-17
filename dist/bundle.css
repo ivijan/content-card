@@ -1,0 +1,170 @@
+body {
+  min-width: 600px; }
+
+.preloader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60px;
+  height: 60px;
+  margin: -42px 0 0 -12px;
+  background: #d9534f;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  -webkit-animation: spin 1s infinite linear;
+  animation: spin 1s infinite linear; }
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+
+.cardsBlock {
+  display: block;
+  overflow: hidden;
+  /* Small devices (tablets, 768px and up) */
+  /* Medium devices (desktops, 992px and up) */
+  /* Large devices (large desktops, 1200px and up) */ }
+  .cardsBlock:after {
+    content: "";
+    display: block;
+    padding-top: 100%; }
+  .cardsBlock-content, .cardsBlock-background, .cardsBlock-overlay, .cardsBlock-tooltip {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0; }
+  .cardsBlock-background {
+    display: block;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-size: cover;
+    border-radius: 5px;
+    border: 1px solid white;
+    z-index: -1; }
+  .cardsBlock-overlay {
+    background: black;
+    opacity: 0;
+    border-radius: 5px;
+    border: 1px solid white;
+    -webkit-transition: opacity .2s ease-in;
+    transition: opacity .2s ease-in; }
+  .cardsBlock:hover .cardsBlock-overlay {
+    opacity: .5; }
+  .cardsBlock-tooltip {
+    text-align: center;
+    overflow: hidden;
+    background: #fff;
+    height: 60px;
+    padding-top: 12px;
+    max-height: 0;
+    opacity: 0;
+    -webkit-transition: all .1s ease-in;
+    transition: all .1s ease-in;
+    top: auto;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+    border-bottom: 1px solid white; }
+  .cardsBlock:hover .cardsBlock-tooltip {
+    max-height: 60px;
+    opacity: .8; }
+  .cardsBlock-title, .cardsBlock-description {
+    color: #fff;
+    overflow: hidden;
+    line-height: 1;
+    padding-left: 30px;
+    word-wrap: break-word;
+    text-shadow: 2px 2px 2px #000; }
+  .cardsBlock-title {
+    font-family: 'Baloo Thambi', cursive; }
+    .cardsBlock-title:before {
+      font-family: 'Glyphicons Halflings', 'Arial', sans-serif;
+      content: "\e011";
+      margin-right: 10px; }
+  .cardsBlock-description {
+    font-family: 'Open Sans', sans-serif; }
+  .cardsBlock-controls {
+    text-align: center; }
+    .cardsBlock-controls .btn {
+      color: #fff;
+      background-color: #000;
+      border-radius: 20px; }
+      .cardsBlock-controls .btn:hover {
+        background-color: #337ab7; }
+    .cardsBlock-controls-open.btn:hover {
+      color: #5cb85c; }
+    .cardsBlock-controls-remove.btn:hover {
+      color: #f0ad4e; }
+    .cardsBlock-controls-save.btn:hover {
+      color: #d9534f; }
+  .cardsBlock .cardsBlock-content {
+    padding: 20px; }
+  .cardsBlock .cardsBlock-title {
+    max-height: 102.5px;
+    font-size: 25px;
+    margin-top: 20px;
+    margin-bottom: 20px; }
+  .cardsBlock .cardsBlock-description {
+    max-height: 102px;
+    font-size: 20px;
+    margin-bottom: 20px; }
+  @media (min-width: 768px) {
+    .cardsBlock .cardsBlock-content {
+      padding: 25px; }
+    .cardsBlock .cardsBlock-title {
+      max-height: 73.8px;
+      font-size: 18px;
+      margin-top: 25px;
+      margin-bottom: 25px; }
+    .cardsBlock .cardsBlock-description {
+      max-height: 65.6px;
+      font-size: 16px;
+      margin-bottom: 25px; } }
+  @media (min-width: 992px) {
+    .cardsBlock .cardsBlock-content {
+      padding: 20px; }
+    .cardsBlock .cardsBlock-title {
+      max-height: 50.4px;
+      font-size: 24px;
+      margin-top: 20px;
+      margin-bottom: 20px; }
+    .cardsBlock .cardsBlock-description {
+      max-height: 65.6px;
+      font-size: 16px;
+      margin-bottom: 20px; } }
+  @media (min-width: 1200px) {
+    .cardsBlock .cardsBlock-content {
+      padding: 20px; }
+    .cardsBlock .cardsBlock-title {
+      max-height: 62px;
+      font-size: 20px;
+      margin-top: 20px;
+      margin-bottom: 20px; }
+    .cardsBlock .cardsBlock-description {
+      max-height: 81.6px;
+      font-size: 16px;
+      margin-bottom: 20px; } }
+  @media (max-width: 767px) {
+    .cardsBlock:after {
+      padding-top: 50%; } }
+
+.cardsList {
+  padding: 15px; }
+  .cardsList .col:hover {
+    z-index: 1; }
+
+/*# sourceMappingURL=bundle.css.map */

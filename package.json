@@ -36,7 +36,6 @@
     "react": "^0.14.9",
     "react-bootstrap": "^0.31.3",
     "react-dom": "^0.14.9",
-    "react-tilt": "^0.1.3",
-    "storm-adaptive-background": "^0.3.0"
+    "react-tilt": "^0.1.3"
   }
 }
