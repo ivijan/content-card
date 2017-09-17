@@ -1,0 +1,210 @@
+@import 'bootstrap/variables';
+
+$cardsBlock--border-radius: 5px;
+$cardsBlock--border: 1px solid white;
+
+body {
+    min-width: 600px;
+}
+
+.preloader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60px;
+    height: 60px;
+    margin: -42px 0 0 -12px;
+    background: $brand-danger;
+    transform: rotate(45deg);
+    animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform:rotate(360deg);
+    }
+}
+
+@mixin card-mixin($padding, $titleFontSize, $descriptionFontSize, $titleRows, $descriptionRows) {
+    .cardsBlock {
+        &-content {
+            padding: $padding;
+        }
+
+        &-title {
+            max-height: $titleFontSize * ($titleRows + 0.1);
+            font-size: $titleFontSize;
+            margin-top: $padding;
+            margin-bottom: $padding;
+        }
+
+        &-description {
+            max-height: $descriptionFontSize * ($descriptionRows + 0.1);
+            font-size: $descriptionFontSize;
+            margin-bottom: $padding;
+        }
+    }
+}
+
+.cardsBlock {
+    display: block;
+    //position: relative;
+    overflow: hidden;
+
+    &:after {
+        content: "";
+        display: block;
+        padding-top: 100%;
+    }
+
+    &-content,
+    &-background,
+    &-overlay,
+    &-tooltip {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+
+    &-background {
+        display: block;
+        background: {
+            repeat: no-repeat;
+            position: bottom right;
+            size: cover;
+        }
+        border-radius: $cardsBlock--border-radius;
+        border: $cardsBlock--border;
+        z-index: -1;
+    }
+
+    &-overlay {
+        background: black;
+        opacity: 0;
+        border-radius: $cardsBlock--border-radius;
+        border: $cardsBlock--border;
+        transition: opacity .2s ease-in;
+    }
+
+    &:hover &-overlay {
+        opacity: .5;
+    }
+
+    &-tooltip {
+        text-align: center;
+        overflow: hidden;
+        background: #fff;
+        height: 60px;
+        padding-top: 12px;
+        max-height: 0;
+        opacity: 0;
+        transition: all .1s ease-in;
+        top: auto;
+        border: {
+            bottom: {
+                left-radius: $cardsBlock--border-radius;
+                right-radius: $cardsBlock--border-radius;
+            }
+            left: $cardsBlock--border;
+            right: $cardsBlock--border;
+            bottom: $cardsBlock--border;
+        }
+    }
+
+    &:hover &-tooltip {
+        max-height: 60px;
+        opacity: .8;
+    }
+
+    &-title,
+    &-description {
+        color: #fff;
+        overflow: hidden;
+        line-height: 1;
+        padding-left: 30px;
+        word-wrap: break-word;
+        text-shadow: 2px 2px 2px #000;
+    }
+
+    &-title {
+        font-family: 'Baloo Thambi', cursive;
+
+        &:before {
+            font-family: 'Glyphicons Halflings', 'Arial', sans-serif;
+            content: "\e011";
+            margin-right: 10px;
+        }
+    }
+
+    &-description {
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    &-controls {
+        text-align: center;
+
+        .btn {
+            color: #fff;
+            background-color: #000;
+            border-radius: 20px;
+
+            &:hover {
+                background-color: $btn-primary-bg;
+            }
+        }
+
+        &-open.btn {
+            &:hover {
+                color: $btn-success-bg;
+            }
+        }
+
+        &-remove.btn {
+            &:hover {
+                color: $btn-warning-bg;
+            }
+        }
+
+        &-save.btn {
+            &:hover {
+                color: $btn-danger-bg;
+            }
+        }
+    }
+
+    @include card-mixin(20px, 25px, 20px, 4, 5);
+
+    /* Small devices (tablets, 768px and up) */
+    @media (min-width: $screen-sm) {
+        @include card-mixin(25px, 18px, 16px, 4, 4);
+    }
+
+    /* Medium devices (desktops, 992px and up) */
+    @media (min-width: $screen-md) {
+        @include card-mixin(20px, 24px, 16px, 2, 4);
+    }
+
+    /* Large devices (large desktops, 1200px and up) */
+    @media (min-width: $screen-lg) {
+        @include card-mixin(20px, 20px, 16px, 3, 5);
+    }
+
+    @media (max-width: $screen-sm - 1px) {
+        &:after {
+            padding-top: 50%;
+        }
+    }
+}
+
+.cardsList {
+    padding: 15px;
+
+    .col:hover {
+        z-index: 1;
+    }
+}
