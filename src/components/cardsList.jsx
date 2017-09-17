@@ -11,10 +11,10 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
-var _ = require("lodash");
 var $ = require("jquery");
-var CardsBlock_1 = require("./CardsBlock");
+var _ = require("lodash");
 var react_tilt_1 = require("../../node_modules/react-tilt");
+var CardsBlock_1 = require("./CardsBlock");
 var CardsList = /** @class */ (function (_super) {
     __extends(CardsList, _super);
     function CardsList(props) {

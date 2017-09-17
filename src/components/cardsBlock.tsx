@@ -3,7 +3,7 @@
 import * as React from 'react';
 import CardsBlockControls from './CardsBlockControls';
 
-export default class CardsList extends React.Component<any, any> {
+export default class CardsBlock extends React.Component<any, any> {
     public render () {
         return (
             <div className="cardsBlock">

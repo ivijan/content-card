@@ -1,10 +1,10 @@
 'use strict';
 
 import * as React from 'react';
-import * as _ from 'lodash';
 import * as $ from 'jquery';
-import CardsBlock from './CardsBlock';
+import * as _ from 'lodash';
 import Tilt from '../../node_modules/react-tilt';
+import CardsBlock from './CardsBlock';
 
 export default class CardsList extends React.Component<any, any> {
     constructor(props: any){

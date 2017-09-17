@@ -12,12 +12,12 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var CardsBlockControls_1 = require("./CardsBlockControls");
-var CardsList = /** @class */ (function (_super) {
-    __extends(CardsList, _super);
-    function CardsList() {
+var CardsBlock = /** @class */ (function (_super) {
+    __extends(CardsBlock, _super);
+    function CardsBlock() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    CardsList.prototype.render = function () {
+    CardsBlock.prototype.render = function () {
         return (<div className="cardsBlock">
                 <div className="cardsBlock-overlay"/>
                 <div className="cardsBlock-content">
@@ -34,6 +34,6 @@ var CardsList = /** @class */ (function (_super) {
                 <div className="cardsBlock-background" style={{ backgroundImage: 'url(' + this.props.image + ')' }}/>
             </div>);
     };
-    return CardsList;
+    return CardsBlock;
 }(React.Component));
-exports.default = CardsList;
+exports.default = CardsBlock;
