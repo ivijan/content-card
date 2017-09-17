@@ -13,6 +13,7 @@ const source = require('vinyl-source-stream');
 const sourcemaps = require('gulp-sourcemaps');
 const tsify = require('tsify');
 const uglify = require('gulp-uglify');
+const util = require('gulp-util');
 const watchify = require('watchify');
 
 const TS_FOLDER = './src';
@@ -22,6 +23,8 @@ const EXTERNALS = ['react', 'react-dom'];
 const EXTENSIONS = ['.tsx', '.ts', '.js'];
 
 const SASS = './src/**/*.scss';
+
+const production = !!util.env.production;
 
 gulp.task('clean', (cb) => {
     del(['./dist/**'], cb);
@@ -36,7 +39,7 @@ gulp.task('vendor', () => {
         .pipe(source('vendor.js'))
         .pipe(buffer())
         .pipe(sourcemaps.init({ loadMaps: true }))
-        .pipe(uglify())
+        .pipe(production ? uglify() : util.noop())
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('./dist'));
 });
@@ -78,7 +81,7 @@ function ts_bundle(bundler) {
         .pipe(source('bundle.js'))
         .pipe(buffer())
         .pipe(sourcemaps.init({ loadMaps: true }))
-        //.pipe(uglify())
+        .pipe(production ? uglify() : util.noop())
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('./dist'))
         .pipe(connect.reload());
@@ -105,7 +108,9 @@ gulp.task('ts:watch', () => {
 gulp.task('sass', () => {
     gulp.src(SASS)
         .pipe(sourcemaps.init())
-        .pipe(sass().on('error', sass.logError))
+        .pipe(sass(
+            production ? { outputStyle: 'compressed' } : {}
+        ).on('error', sass.logError))
         .pipe(concat('bundle.css'))
         .pipe(autoprefixer({
             browsers: ['last 2 versions'],
@@ -127,5 +132,5 @@ gulp.task('connect', function() {
     });
 });
 
-gulp.task('watch', ['ts:watch', 'sass:watch']);
-gulp.task('default', ['clean', 'ts', 'sass', 'vendor', 'connect', 'watch']);
+gulp.task('watch', ['ts:watch', 'sass:watch', 'connect']);
+gulp.task('default', ['clean', 'ts', 'sass', 'vendor', 'connect']);
