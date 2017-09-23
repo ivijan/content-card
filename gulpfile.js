@@ -56,7 +56,7 @@ function ts_browserify() {
             allowJs: true,
             jsx: 'react',
             target: 'es5',
-            module: 'es6',
+            module: 'es5',
             noImplicitAny: true
         })
         .external(EXTERNALS)
