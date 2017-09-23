@@ -20,8 +20,8 @@ var CardsList = /** @class */ (function (_super) {
     function CardsList(props) {
         var _this = _super.call(this, props) || this;
         _this.state = {
-            dataLoaded: _this.props.dataLoaded || false,
-            data: _this.props.data || []
+            dataLoaded: _this.props.dataLoaded,
+            data: _this.props.data
         };
         _this.removeItem = _this.removeItem.bind(_this);
         _this.sortItem = _this.sortItem.bind(_this);
@@ -51,9 +51,8 @@ var CardsList = /** @class */ (function (_super) {
     CardsList.prototype.removeItem = function (id) {
         var card = this.filterItem(id);
         if (card) {
-            this.setState(function (state) {
-                _.pull(state.data, card);
-                return state;
+            this.setState({
+                data: _.pull(this.state.data, card)
             });
         }
     };

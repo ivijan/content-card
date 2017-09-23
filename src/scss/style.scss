@@ -2,6 +2,7 @@
 
 $cardsBlock--border-radius: 5px;
 $cardsBlock--border: 1px solid white;
+$card--text-shadow: 0.05em 0 black, 0 0.05em black, -0.05em 0 black, 0 -0.05em black, -0.05em -0.05em black, -0.05em 0.05em black, 0.05em -0.05em black, 0.05em 0.05em black;
 
 body {
     min-width: 600px;
@@ -38,12 +39,16 @@ body {
             max-height: $titleFontSize * ($titleRows + 0.1);
             font-size: $titleFontSize;
             margin-top: $padding;
-            margin-bottom: $padding;
         }
 
         &-description {
             max-height: $descriptionFontSize * ($descriptionRows + 0.1);
             font-size: $descriptionFontSize;
+        }
+
+        &-title,
+        &-description {
+            height: 100%;
             margin-bottom: $padding;
         }
     }
@@ -128,7 +133,7 @@ body {
         line-height: 1;
         padding-left: 30px;
         word-wrap: break-word;
-        text-shadow: 2px 2px 2px #000;
+        text-shadow: $card--text-shadow;
     }
 
     &-title {

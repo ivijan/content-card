@@ -10,8 +10,8 @@ export default class CardsList extends React.Component<any, any> {
     constructor(props: any){
         super(props);
         this.state = {
-            dataLoaded: this.props.dataLoaded || false,
-            data: this.props.data || []
+            dataLoaded: this.props.dataLoaded,
+            data: this.props.data
         };
         this.removeItem = this.removeItem.bind(this);
         this.sortItem = this.sortItem.bind(this);
@@ -45,9 +45,8 @@ export default class CardsList extends React.Component<any, any> {
         let card = this.filterItem(id);
 
         if (card) {
-            this.setState(function(state) {
-                _.pull(state.data, card);
-                return state;
+            this.setState({
+                data: _.pull(this.state.data, card)
             });
         }
     }
