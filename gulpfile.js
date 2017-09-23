@@ -55,7 +55,7 @@ function ts_browserify() {
         .plugin(tsify, {
             allowJs: true,
             jsx: 'react',
-            target: 'es6',
+            target: 'es5',
             module: 'es6',
             noImplicitAny: true
         })
