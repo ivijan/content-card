@@ -1,5 +1,6 @@
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
+require("babel-polyfill");
 var React = require("react");
 var ReactDOM = require("react-dom");
 var cardsList_1 = require("./components/cardsList");
