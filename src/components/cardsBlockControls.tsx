@@ -3,8 +3,15 @@
 import * as React from 'react';
 import { Button } from 'react-bootstrap';
 
-export default class CardsBlockControls extends React.Component<any, any> {
-    constructor(props: any){
+export interface ICardBlockControl {
+    id: number;
+    url: string;
+    removeHandler: Function;
+    sortHandler: Function;
+}
+
+export default class CardsBlockControls extends React.Component<ICardBlockControl, ICardBlockControl> {
+    constructor(props: ICardBlockControl) {
         super(props);
         this.state = {
             id: this.props.id,
@@ -16,7 +23,7 @@ export default class CardsBlockControls extends React.Component<any, any> {
         this.removeCardHandler = this.removeCardHandler.bind(this);
     }
 
-    public moveToFrontHandler () {
+    public moveToFrontHandler() {
         console.log("Move card " + this.state.id + " to start of list!");
 
         if (this.state.sortHandler) {
@@ -24,7 +31,7 @@ export default class CardsBlockControls extends React.Component<any, any> {
         }
     }
 
-    public removeCardHandler () {
+    public removeCardHandler() {
         console.log("Remove card " + this.state.id + " from list!");
 
         if (this.state.removeHandler) {
@@ -32,18 +39,18 @@ export default class CardsBlockControls extends React.Component<any, any> {
         }
     }
 
-    public render () {
+    public render() {
         return (
             <div className="cardsBlock-controls">
                 <div className="btn-group">
                     <a className="btn btn-link cardsBlock-controls-open" href={this.state.url}>
-                        <span className="glyphicon glyphicon-eye-open"/>
+                        <span className="glyphicon glyphicon-eye-open" />
                     </a>
                     <Button bsStyle="link" className="cardsBlock-controls-remove" onClick={this.removeCardHandler}>
-                        <span className="glyphicon glyphicon-remove"/>
+                        <span className="glyphicon glyphicon-remove" />
                     </Button>
                     <Button bsStyle="link" className="cardsBlock-controls-save" onClick={this.moveToFrontHandler}>
-                        <span className="glyphicon glyphicon-heart"/>
+                        <span className="glyphicon glyphicon-heart" />
                     </Button>
                 </div>
             </div>

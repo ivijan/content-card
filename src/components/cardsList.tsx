@@ -1,47 +1,52 @@
 'use strict';
 
-import * as React from 'react';
-import * as $ from 'jquery';
 import * as _ from 'lodash';
+import * as React from 'react';
 import Tilt from '../../node_modules/react-tilt';
-import CardsBlock from './CardsBlock';
+import CardsBlock, { ICardBlock } from './CardsBlock';
 
-export default class CardsList extends React.Component<any, any> {
-    constructor(props: any){
+export interface Articles {
+    articles: any[];
+}
+
+export interface ICardsList {
+    dataLoaded: boolean;
+    data: any[];
+    apiUrl: string;
+    error?: string;
+}
+
+export interface ICardBlockExt extends ICardBlock {
+    urlToImage?: string;
+}
+
+export default class CardsList extends React.Component<ICardsList, ICardsList> {
+    constructor(props: ICardsList) {
         super(props);
         this.state = {
             dataLoaded: this.props.dataLoaded,
-            data: this.props.data
+            data: this.props.data,
+            apiUrl: this.props.apiUrl
         };
         this.removeItem = this.removeItem.bind(this);
         this.sortItem = this.sortItem.bind(this);
     }
 
-    componentDidMount () {
-        const self = this;
-        $.ajax({
-                url:      this.props.url,
-                dataType: 'json',
-                cache:    false
+    componentDidMount() {
+        fetch(this.state.apiUrl)
+            .then(result => result.json())
+            .then((response: Articles): void => {
+                const newArr = _.map(response.articles, element => _.extend({}, element, { id: _.uniqueId() }));
+                this.setState({ data: newArr, dataLoaded: true });
             })
-            .then(function(response : any) {
-                const newArr = _.map(response.articles, function(element) {
-                    return _.extend({}, element, {id: _.uniqueId()});
-                });
-
-                self.setState({ data: newArr, dataLoaded: true });
-            })
-            .fail(function() {
-                self.setState({ error: 'Problems with loading data.', dataLoaded: true });
-            });
+            .catch(() => this.setState({ error: 'Problems with loading data.', dataLoaded: true }));
     }
 
-    private filterItem (id : any) {
-        let card = _.filter(this.state.data, function(e: any){ return e.id == id; });
-        return card && card[0];
+    private filterItem(id: number): Articles {
+        return _.find(this.state.data, (data: ICardBlock): boolean => data.id == id);
     }
 
-    public removeItem (id : any) {
+    public removeItem(id: number): void {
         let card = this.filterItem(id);
 
         if (card) {
@@ -51,11 +56,11 @@ export default class CardsList extends React.Component<any, any> {
         }
     }
 
-    public sortItem (id : any) {
+    public sortItem(id: number): void {
         let card = this.filterItem(id);
 
         if (card) {
-            this.setState(function(state) {
+            this.setState((state: ICardsList): ICardsList => {
                 _.pull(state.data, card);
                 state.data.unshift(card);
                 return state;
@@ -63,17 +68,18 @@ export default class CardsList extends React.Component<any, any> {
         }
     }
 
-    public render () {
+    public render() {
+        let content: JSX.Element[];
         const self = this;
-        let content : any = <div className="alert alert-warning">'Oops. List is empty.'</div>;
+        content = [<div className="alert alert-warning">'Oops. List is empty.'</div>];
         if (!this.state.dataLoaded) {
-            content = <div className="preloader"/>;
+            content = [<div className="preloader" />];
         } else if (this.state.error) {
-            content = <div className="alert alert-danger">{this.state.error}</div>;
+            content = [<div className="alert alert-danger">{this.state.error}</div>];
         } else if (this.state.data.length) {
-            content = _.map(this.state.data, function(item : any) {
+            content = _.map(this.state.data, (item: ICardBlockExt): JSX.Element => {
                 return (
-                    <Tilt options={{ max : 15, scale: 1.05 }} className="col col-lg-3 col-md-4 col-sm-6 col-xs-12"
+                    <Tilt options={{ max: 15, scale: 1.05 }} className="col col-lg-3 col-md-4 col-sm-6 col-xs-12"
                         key={item.id}>
                         <CardsBlock
                             title={item.title}
